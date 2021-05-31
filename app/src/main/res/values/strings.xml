@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GitManager</string>
+    <string name="loadingSignInTitle">Sign in with</string>
 </resources>
