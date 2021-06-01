@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray_background"
-    tools:context=".SignIn">
+    tools:context=".features.authentication.ui.SignIn">
 
     <ImageView
         android:id="@+id/imageView"
@@ -65,4 +65,14 @@
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/github" />
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/backArrow"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24" />
 </androidx.constraintlayout.widget.ConstraintLayout>

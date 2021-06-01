@@ -1,13 +1,15 @@
-package com.atekutov.gitmanager
+package com.atekutov.gitmanager.features.authentication.ui
 
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
+import com.atekutov.gitmanager.R
+import com.atekutov.gitmanager.databinding.AuthenticatedAccauntsScreenBinding
+import com.atekutov.gitmanager.entities.SupportedApiProviders
 
 class SignIn : AppCompatActivity() {
 
@@ -21,32 +23,25 @@ class SignIn : AppCompatActivity() {
 //    private val redirectUri = "gitmanagergitlab://callback/"
 //    private val requestString = "https://gitlab.com/oauth/authorize?client_id=$appId&redirect_uri=$redirectUri&response_type=code&scope=api+read_user+read_api+read_repository+write_repository+read_registry+write_registry+sudo+openid+profile+email"
 
+    var apiProvider: SupportedApiProviders = SupportedApiProviders.gitHub
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
 
-        Log.i("kek", "Heh start...")
-
         findViewById<ImageButton>(R.id.buttonSignInGitLab).setOnClickListener {
-            val intent = Intent(
-                Intent.ACTION_VIEW,
-                Uri.parse(requestString)
-            )
-            startActivity(intent)
+            showProvidorAuthenticationPage(SupportedApiProviders.gitLab)
         }
         findViewById<ImageButton>(R.id.buttonSignInGitHub).setOnClickListener {
-            val intent = Intent(
-                Intent.ACTION_VIEW,
-                Uri.parse(requestString)
-            )
-            startActivity(intent)
+            showProvidorAuthenticationPage(SupportedApiProviders.gitHub)
+        }
+        findViewById<ImageView>(R.id.backArrow).setOnClickListener {
+            onBackPressed()
         }
     }
 
     override fun onResume() {
         super.onResume()
-
-        Log.i("kek", "Resume main")
 
         val uri = intent.data
         Log.i("kek", "Data: $uri")
@@ -56,5 +51,15 @@ class SignIn : AppCompatActivity() {
         uri?.getQueryParameter("error")?.let {
             Log.i("kek", "Lol what: $it")
         }
+//        onBackPressed()
+    }
+
+    fun showProvidorAuthenticationPage(provider: SupportedApiProviders) {
+        apiProvider = provider
+        val intent = Intent(
+            Intent.ACTION_VIEW,
+            Uri.parse(requestString)
+        )
+        startActivity(intent)
     }
 }

@@ -1,4 +1,4 @@
-package com.atekutov.gitmanager
+package com.atekutov.gitmanager.common
 
 import android.util.Log
 import androidx.annotation.LayoutRes
